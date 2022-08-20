@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
 :root {
   --primary-color: #01216b;
   --secondary-color: #7e0b1e;
@@ -15,6 +17,7 @@ body {
   height: 100vh;
   display: grid;
   place-items: center;
+  font-family: "Poppins" sans-serif;
 }
 
 .site-title {
@@ -32,6 +35,17 @@ body {
   place-items: center;
   border-radius: 1em;
   padding: 2em 1em;
+  animation: slideUp 1s linear;
+  transition: transform all 1s;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
 }
 
 @media screen and (max-width: 465px) {
@@ -134,7 +148,7 @@ form input:focus {
 }
 
 .resultValue {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 800;
   color: var(--secondary-color);
   background-color: #f4f4f4;

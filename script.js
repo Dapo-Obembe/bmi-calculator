@@ -5,7 +5,7 @@ const calcContainer = document.querySelector(".calc-wrapper");
 const calcResult = document.querySelector(".calc-result");
 const calcBtn = document.querySelector(".calc-btn");
 
-let person = prompt("Please enter your name");
+let person = prompt("Please enter your first name");
 
 //Result variables
 const resultContainer = document.querySelector(".calc-result");
@@ -18,11 +18,11 @@ function calcBmi(e) {
 
   let heightValue = document.querySelector("#heightValue").value;
 
-  let bmiValue = eval(`${weightValue} / ${heightValue} ** 2`).toFixed(2);
+  let bmiValue = eval(`${weightValue} / (${heightValue} ** 2)`).toFixed(2);
 
   //If name is not filled
-  if (person === null) {
-    person = "Guest";
+  if (person === null || person === "") {
+    return (person = "Guest");
   }
 
   //Hide calculator container
@@ -35,17 +35,20 @@ function calcBmi(e) {
   bmiResult.innerHTML = `Hello, ${person}. Your BMI is: <span class="resultValue">${bmiValue}</span>`;
 
   //Conditional statements
-  if (bmiValue < 18.5) {
-    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating you are UNDERWEIGHT. ${person}, eat more healthy foods, add nutrient-dense snacks and stay active to boost your appetite.`;
-  } else if (bmiValue > 18.5) {
-    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating your weight is in the NORMAL category of your height. Maintaining a healthy weight may reduce the risk of chronic diseases associated with overweight and obesity.`;
-  } else if (bmiValue > 25) {
-    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating YOU ARE OVERWEIGHT. ${person}, you need to work on your lifestyle, stay hydrated with water, avoid drinks with added sugar, be physically active and swap out your usual foods for healthier alternatives.`;
-  } else {
-    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating that YOU ARE OBESE! Please see a medical personel as soon as possible.`;
-  }
 
-  return bmiValue;
+  if (bmiValue < 18.5) {
+    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating you are <strong>UNDERWEIGHT</strong>. ${person}, eat more healthy foods, add nutrient-dense snacks and stay active to boost your appetite.`;
+  }
+  if (bmiValue >= 18.5 || bmiValue <= 24.9) {
+    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating your weight is in the NORMAL category of your height. Maintaining a healthy weight may reduce the risk of chronic diseases associated with overweight and obesity.`;
+  }
+  if (bmiValue >= 25 || bmiValue <= 29.9) {
+    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating <strong>YOU ARE OVERWEIGHT</strong>.<br/><br/> ${person}, you need to work on your lifestyle, stay hydrated with water, avoid drinks with added sugar, be physically active and swap out your usual foods for healthier alternatives.`;
+  }
+  if (bmiValue >= 30) {
+    bmiNote.innerHTML = `Your BMI is <strong>${bmiValue}</strong> indicating that <strong>YOU ARE OBESE!</strong> Please see a medical personel as soon as possible.`;
+  }
+  return;
 }
 
 calcBtn.addEventListener("click", calcBmi);
